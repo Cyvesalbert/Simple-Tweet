@@ -20,7 +20,7 @@ import java.util.List;
 import okhttp3.Headers;
 
 public class TimelineActivity extends AppCompatActivity {
-    public static final String TAG = "TimelineActivity ";
+    public static final String TAG = "TimelineActivity";
     TwitterClient client;
     RecyclerView rvTweets;
     List<Tweet> tweets;
@@ -36,7 +36,7 @@ public class TimelineActivity extends AppCompatActivity {
 
         client = TwitterApp.getRestClient(this);
 
-        swipeContainer.findViewById(R.id.swipeContainer);
+        swipeContainer = (SwipeRefreshLayout) findViewById(R.id.swipeContainer);
         //configure the refreshing colors
         swipeContainer.setColorSchemeResources(android.R.color.holo_blue_bright,
                 android.R.color.holo_green_light,
@@ -51,7 +51,7 @@ public class TimelineActivity extends AppCompatActivity {
         });
 
         //find the recycler view
-        rvTweets = findViewById(R.id.rvTweets);
+        rvTweets = (RecyclerView) findViewById(R.id.rvTweets);
         //init the list of tweets and adapter
         tweets = new ArrayList<>();
         adapter = new TweetsAdapter(this, tweets);
@@ -80,9 +80,9 @@ public class TimelineActivity extends AppCompatActivity {
             public void onSuccess(int statusCode, Headers headers, JSON json) {
                 Log.i(TAG, "onSuccess for loadMoreData" + json.toString());
                 //deserialize and construct new model objects from API response
-                JSONArray jsonArray = new JSONArray();
+                JSONArray jsonArray = json.jsonArray;
                 try {
-                    List<Tweet> tweets = Tweet.fronJsonArray(jsonArray);
+                    tweets = Tweet.fromJsonArray(jsonArray);
                     //append the new data objects to the existing set of items inside the array of item
                     //notify the adapter of the new items made with notifyItemRangeInserted
                     adapter.addAll(tweets);
@@ -103,11 +103,11 @@ public class TimelineActivity extends AppCompatActivity {
         client.getHomeTimeline(new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                Log.i(TAG, "onSuccess");
+                Log.i(TAG, "onSuccess" + json.toString());
                 JSONArray jsonArray = json.jsonArray;
                 try {
                     adapter.clear();
-                    adapter.addAll(Tweet.fronJsonArray(jsonArray));
+                    adapter.addAll(Tweet.fromJsonArray(jsonArray));
                     //now we call setRefreshing(false) to signal refresh has finish
                     swipeContainer.setRefreshing(false);
                 } catch (JSONException e) {
@@ -118,7 +118,7 @@ public class TimelineActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.e(TAG, "onFailure", throwable);
+                Log.e(TAG, "onFailure" + response, throwable);
             }
         });
     }
