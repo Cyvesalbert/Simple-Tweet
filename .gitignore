@@ -65,3 +65,6 @@ build
 import-summary.txt
 
 apikey.properties
+*.md
+!README.md
+*.yml
