@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
@@ -13,7 +14,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import com.codepath.apps.restclienttemplate.models.Tweet;
 import com.codepath.apps.restclienttemplate.models.TweetDao;
@@ -74,6 +74,10 @@ public class TimelineActivity extends AppCompatActivity {
         //RecyclerView setup: layout manager and the adapter
         rvTweets.setLayoutManager(layoutManager);
         rvTweets.setAdapter(adapter);
+
+        // call the method addItemDecoration with the
+        // recyclerView instance and add default Item Divider
+        rvTweets.addItemDecoration(new DividerItemDecoration(rvTweets.getContext(), layoutManager.getOrientation()));
 
         scrollListener = new EndlessRecyclerViewScrollListener(layoutManager) {
             @Override

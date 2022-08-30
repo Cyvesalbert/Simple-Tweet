@@ -77,7 +77,8 @@ The following **optional** features are implemented:
 
 The following **additional** features are implemented:
 
-- [ ] List anything else that you can get done to improve the app functionality!
+- [x] Username of the users are displayed in bold
+- [x] Add a divider between the items in the RecyclerView
 
 ## Video Walkthrough
 
@@ -86,6 +87,7 @@ Here's a walkthrough of implemented user stories:
 <img src='https://github.com/Cyvesalbert/Simple-Tweet/blob/main/simple-tweet-2.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 <img src='https://github.com/Cyvesalbert/Simple-Tweet/blob/main/simple-tweet-3.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 <img src='https://github.com/Cyvesalbert/Simple-Tweet/blob/main/simple-tweet-4.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://github.com/Cyvesalbert/Simple-Tweet/blob/main/simple-tweet-5.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
